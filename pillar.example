@@ -1,0 +1,39 @@
+ufw:
+
+  enabled: True
+
+  services:
+
+    # Allow 80/tcp (http) traffic from only two remote addresses.
+    http:
+      protocol: tcp
+      from_addr:
+        - 10.0.2.15
+        - 10.0.2.16
+
+    # Allow 443/tcp (https) traffic from network 10.0.0.0/8 to an specific local ip.
+    https:
+      protocol: tcp
+      from_addr:
+        - 10.0.0.0/8
+      to_addr: 10.0.2.1
+
+    # Allow from a service port.
+    smtp:
+      protocol: tcp
+
+    # Allow from an specific port, by number.
+    139:
+      protocol: tcp
+
+    # Allow from a range of ports, udp.
+    "10000:20000":
+      protocol: udp
+
+    # Allow from two specific ports, udp.
+    "30000,40000":
+      protocol: udp
+
+  # Allow an application defined at /etc/ufw/applications.d/
+  applications:
+    - OpenSSH
