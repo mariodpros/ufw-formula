@@ -37,3 +37,7 @@ ufw:
   # Allow an application defined at /etc/ufw/applications.d/
   applications:
     - OpenSSH
+
+  # Allow all traffic in on the specified interface
+  interfaces:
+    - eth1
