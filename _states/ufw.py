@@ -81,7 +81,7 @@ def enabled(name, **kwargs):
 def allowed(name, app=None, interface=None, protocol=None,
             from_addr=None, from_port=None, to_addr=None, to_port=None):
 
-    rule = _as_rule("allow", app=app, interface=None, protocol=protocol,
+    rule = _as_rule("allow", app=app, interface=interface, protocol=protocol,
                    from_addr=from_addr, from_port=from_port, to_addr=to_addr, to_port=to_port)
 
     if __opts__['test']:
