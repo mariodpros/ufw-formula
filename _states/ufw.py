@@ -27,10 +27,14 @@ def _resolve(host):
     return socket.gethostbyname(host)
 
 
-def _as_rule(method, app, protocol, from_addr, from_port, to_addr, to_port):
+def _as_rule(method, app, interface, protocol, from_addr, from_port, to_addr, to_port):
     cmd = [method]
     if app is not None:
         cmd.append(app)
+    elif interface is not None:
+    	cmd.append("in")
+    	cmd.append("on")
+    	cmd.append(interface)
     else:
         if protocol is not None:
             cmd.append("proto")
@@ -74,10 +78,10 @@ def enabled(name, **kwargs):
     return _changed(name, "UFW is enabled", enabled=True)
 
 
-def allowed(name, app=None, protocol=None,
+def allowed(name, app=None, interface=None, protocol=None,
             from_addr=None, from_port=None, to_addr=None, to_port=None):
 
-    rule = _as_rule("allow", app=app, protocol=protocol,
+    rule = _as_rule("allow", app=app, interface=interface, protocol=protocol,
                    from_addr=from_addr, from_port=from_port, to_addr=to_addr, to_port=to_port)
 
     if __opts__['test']:

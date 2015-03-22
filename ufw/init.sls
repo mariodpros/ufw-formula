@@ -50,6 +50,17 @@ ufw-app-{{app_name}}:
       - pkg: ufw
 
   {%- endfor %}
+  
+  # Interfaces
+  {%- for interface in ufw.get('interfaces', []) %}
+
+ufw-interface-{{interface}}:
+  ufw.allowed:
+    - interface: {{interface}}
+    - require:
+      - pkg: ufw
+
+  {%- endfor %}
 
 {% else %}
   #ufw:
