@@ -24,13 +24,13 @@ ufw-svc-{{service_name}}-{{from_addr}}:
   ufw.allowed:
     - protocol: {{protocol}}
     {%- if from_addr != None %}
-    - from_addr: {{from_addr}}
+    - from_addr: "{{from_addr}}"
     {%- endif %}
     {%- if from_port != None %}
     - from_port: "{{from_port}}"
     {%- endif %}
     {%- if to_addr != None %}
-    - to_addr: {{to_addr}}
+    - to_addr: "{{to_addr}}"
     {%- endif %}
     - to_port: "{{service_name}}"
     - require:
