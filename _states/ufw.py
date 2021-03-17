@@ -20,9 +20,13 @@ def _changed(name, msg, **changes):
 
 
 def _resolve(host):
-    # pure IP address / netmask IPv4 or IPv6 ?
-    if re.match(r'^([0-9\.](::))+(/[0-9]+)?$', host):
-        return
+    # pure IP address / netmask IPv4?
+    if re.match(r'^([0-9\.])+(/[0-9]+)?$', host):
+        return host
+
+    # pure IPv6 address / netmask?
+    if re.match(r'^([0-9a-f:]+)(/[0-9]+)?$', host):
+        return host
 
     return socket.gethostbyname(host)
 
